@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.data.mapper.MqttMapper">
+    <update id="mm" parameterType="String">
+        update class kc
+        set datakey=#{datakey},datavalue=#{datavalue},time=#{time}
+        where classtype=#{classtype} and classnumber=#{classnumber}
+    </update>
+    <insert id="updateClass">
+        insert into class(classid,classtype,classnumber,datakey,datavalue,time) VALUES (#{classid},#{classtype},#{classnumber},#{datakey},#{datavalue},#{time})
+
+    </insert>
+
+
+    <select id="selectData" parameterType="String" resultType="BuildClass">
+        select classtype,classnumber,datakey,datavalue
+        from class cl inner join classdata cd on cl.classid=cd.id
+        where classtype = #{classtype} and classnumber= #{classnumber}
+    </select>
+</mapper>
